@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import ToDos from './components/ToDos';
+import { useEffect, useState } from 'react';
 
 function App() {
   // 1
@@ -13,9 +12,13 @@ function App() {
   const onSubmit = (e) => {
     e.preventDefault();
     const toDo = value.trim();
+    const toDoObj = {
+      id: Date.now(),
+      toDo,
+    };
 
     if (toDo) {
-      setToDos((prev) => [...prev, toDo]);
+      setToDos((prev) => [...prev, toDoObj]);
     }
     setValue('');
   };
@@ -28,9 +31,29 @@ function App() {
     setValue(value);
   };
 
+  const handleDel = (e) => {
+    // console.dir(e.target.parentNode.parentNode.id);
+    const {
+      target: {
+        parentNode: {
+          parentNode: { id },
+        },
+      },
+    } = e;
+    const newToDos = toDos.filter((toDo) => toDo.id !== parseInt(id));
+    setToDos(newToDos);
+    // console.log(newToDos, id);
+    // console.log(toDos, id);
+  };
+
+  useEffect(() => {
+    {
+      console.log(toDos);
+    }
+  }, [toDos]);
+
   return (
     <div>
-      {/* {console.log(toDos)} */}
       <form onSubmit={onSubmit}>
         <input
           onChange={onChange}
@@ -40,7 +63,20 @@ function App() {
         />
         <button>Submit</button>
       </form>
-      {toDos && <ToDos toDos={toDos} />}
+      {toDos && (
+        <ul>
+          {toDos.map((toDo, index) => (
+            <li key={index} id={toDo.id}>
+              <span>{toDo.toDo}</span>
+              <div>
+                <button onClick={handleDel}>Done</button>
+                <button>Rewrite</button>
+                <button>Del</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
