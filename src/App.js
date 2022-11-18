@@ -31,7 +31,7 @@ function App() {
     setValue(value);
   };
 
-  const handleDel = (e) => {
+  const handleDelToDos = (e) => {
     // console.dir(e.target.parentNode.parentNode.id);
     const {
       target: {
@@ -42,6 +42,21 @@ function App() {
     } = e;
     const newToDos = toDos.filter((toDo) => toDo.id !== parseInt(id));
     setToDos(newToDos);
+    // console.log(newToDos, id);
+    // console.log(toDos, id);
+  };
+
+  const handleDelToDones = (e) => {
+    // console.dir(e.target.parentNode.parentNode.id);
+    const {
+      target: {
+        parentNode: {
+          parentNode: { id },
+        },
+      },
+    } = e;
+    const newToDones = toDones.filter((toDone) => toDone.id !== parseInt(id));
+    setToDones(newToDones);
     // console.log(newToDos, id);
     // console.log(toDos, id);
   };
@@ -79,10 +94,8 @@ function App() {
   };
 
   useEffect(() => {
-    {
-      console.log('toDos', toDos);
-      console.log('toDone', toDones);
-    }
+    console.log('toDos', toDos);
+    console.log('toDone', toDones);
   }, [toDos, toDones]);
 
   return (
@@ -102,7 +115,7 @@ function App() {
             <li key={index} id={toDo.id}>
               <span>{toDo.text}</span>
               <div>
-                <button onClick={handleDel}>Del</button>
+                <button onClick={handleDelToDos}>Del</button>
                 <button>Rewrite</button>
                 <button onClick={convertToDo}>Done</button>
               </div>
@@ -116,7 +129,7 @@ function App() {
             <li key={index} id={toDone.id}>
               <span>{toDone.text}</span>
               <div>
-                <button onClick={handleDel}>Del</button>
+                <button onClick={handleDelToDones}>Del</button>
                 <button>Rewrite</button>
                 <button onClick={convertToDone}>Do</button>
               </div>
