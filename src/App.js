@@ -69,9 +69,9 @@ function App() {
             <li key={index} id={toDo.id}>
               <span>{toDo.toDo}</span>
               <div>
-                <button onClick={handleDel}>Done</button>
+                <button onClick={handleDel}>Del</button>
                 <button>Rewrite</button>
-                <button>Del</button>
+                <button>Done</button>
               </div>
             </li>
           ))}
