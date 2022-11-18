@@ -118,7 +118,7 @@ function App() {
               <div>
                 <button onClick={handleDel}>Del</button>
                 <button>Rewrite</button>
-                <button onClick={convertToDone}>Done</button>
+                <button onClick={convertToDone}>Do</button>
               </div>
             </li>
           ))}
