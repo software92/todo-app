@@ -7,14 +7,14 @@ function App() {
   // 저장 후 toDos <==> toDone 데이터 변경 가능
   const [value, setValue] = useState('');
   const [toDos, setToDos] = useState([]);
-  // const [toDone, setToDone] = useState([]);
+  const [toDones, setToDones] = useState([]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     const toDo = value.trim();
     const toDoObj = {
       id: Date.now(),
-      toDo,
+      text: toDo,
     };
 
     if (toDo) {
@@ -46,11 +46,44 @@ function App() {
     // console.log(toDos, id);
   };
 
+  const convertToDo = (e) => {
+    const {
+      target: {
+        parentNode: {
+          parentNode: { id },
+        },
+      },
+    } = e;
+
+    const newToDos = toDos.filter((toDo) => toDo.id !== parseInt(id));
+    const doneToDo = toDos.find((toDo) => toDo.id === parseInt(id));
+
+    setToDos(newToDos);
+    setToDones((prev) => [...prev, doneToDo]);
+  };
+
+  const convertToDone = (e) => {
+    const {
+      target: {
+        parentNode: {
+          parentNode: { id },
+        },
+      },
+    } = e;
+
+    const newToDones = toDones.filter((toDone) => toDone.id !== parseInt(id));
+    const doToDone = toDones.find((toDone) => toDone.id === parseInt(id));
+
+    setToDones(newToDones);
+    setToDos((prev) => [...prev, doToDone]);
+  };
+
   useEffect(() => {
     {
-      console.log(toDos);
+      console.log('toDos', toDos);
+      console.log('toDone', toDones);
     }
-  }, [toDos]);
+  }, [toDos, toDones]);
 
   return (
     <div>
@@ -67,11 +100,25 @@ function App() {
         <ul>
           {toDos.map((toDo, index) => (
             <li key={index} id={toDo.id}>
-              <span>{toDo.toDo}</span>
+              <span>{toDo.text}</span>
               <div>
                 <button onClick={handleDel}>Del</button>
                 <button>Rewrite</button>
-                <button>Done</button>
+                <button onClick={convertToDo}>Done</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {toDones && (
+        <ul>
+          {toDones.map((toDone, index) => (
+            <li key={index} id={toDone.id}>
+              <span>{toDone.text}</span>
+              <div>
+                <button onClick={handleDel}>Del</button>
+                <button>Rewrite</button>
+                <button onClick={convertToDone}>Done</button>
               </div>
             </li>
           ))}
