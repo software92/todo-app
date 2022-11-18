@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react';
 
+const loadInitialToDos = () => {
+  const loadToDos = JSON.parse(localStorage.getItem('toDos'));
+  return loadToDos || [];
+};
+const loadInitialToDones = () => {
+  const loadToDones = JSON.parse(localStorage.getItem('toDones'));
+  return loadToDones || [];
+};
+
 function App() {
   // 1
   // toDos, toDone 2가지 형태로 데이터 분리
   // 처음 to do 추가시 무조건 toDos에 저장
   // 저장 후 toDos <==> toDone 데이터 변경 가능
   const [value, setValue] = useState('');
-  const [toDos, setToDos] = useState([]);
-  const [toDones, setToDones] = useState([]);
+  const [toDos, setToDos] = useState(loadInitialToDos());
+  const [toDones, setToDones] = useState(loadInitialToDones());
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +26,7 @@ function App() {
       text: toDo,
     };
 
+    // 아무것도 입력되지 않거나, 공백인 문자만 입력될 때는 toDos 변경 없음
     if (toDo) {
       setToDos((prev) => [...prev, toDoObj]);
     }
@@ -93,7 +103,15 @@ function App() {
     setToDos((prev) => [...prev, doToDone]);
   };
 
+  // useEffect(() => {
+  //   console.log('load', loadInitialToDos());
+  //   console.log('load', loadInitialToDones());
+  // }, []);
+
   useEffect(() => {
+    localStorage.setItem('toDos', JSON.stringify(toDos));
+    localStorage.setItem('toDones', JSON.stringify(toDones));
+
     console.log('toDos', toDos);
     console.log('toDone', toDones);
   }, [toDos, toDones]);
