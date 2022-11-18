@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ToDos from './components/ToDos';
 
 function App() {
   // 1
@@ -39,6 +40,7 @@ function App() {
         />
         <button>Submit</button>
       </form>
+      {toDos && <ToDos toDos={toDos} />}
     </div>
   );
 }
