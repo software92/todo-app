@@ -1,23 +1,29 @@
 import { useEffect, useState } from 'react';
+import Form from './components/Form';
+import ToDonesList from './components/ToDonesList';
+import ToDosList from './components/ToDosList';
 
+const TODOS = 'toDos';
+const TODONES = 'toDones';
+
+// Web 접속 / 페이지 reload,
+// localStorage에 저장되어 있는 toDos, toDones를 가져옴
+// 데이터가 없으면 []
 const loadInitialToDos = () => {
-  const loadToDos = JSON.parse(localStorage.getItem('toDos'));
+  const loadToDos = JSON.parse(localStorage.getItem(TODOS));
   return loadToDos || [];
 };
 const loadInitialToDones = () => {
-  const loadToDones = JSON.parse(localStorage.getItem('toDones'));
+  const loadToDones = JSON.parse(localStorage.getItem(TODONES));
   return loadToDones || [];
 };
 
 function App() {
-  // 1
-  // toDos, toDone 2가지 형태로 데이터 분리
-  // 처음 to do 추가시 무조건 toDos에 저장
-  // 저장 후 toDos <==> toDone 데이터 변경 가능
   const [value, setValue] = useState('');
   const [toDos, setToDos] = useState(loadInitialToDos());
   const [toDones, setToDones] = useState(loadInitialToDones());
 
+  // 할 일(toDos) 추가
   const onSubmit = (e) => {
     e.preventDefault();
     const toDo = value.trim();
@@ -26,7 +32,6 @@ function App() {
       text: toDo,
     };
 
-    // 아무것도 입력되지 않거나, 공백인 문자만 입력될 때는 toDos 변경 없음
     if (toDo) {
       setToDos((prev) => [...prev, toDoObj]);
     }
@@ -41,8 +46,8 @@ function App() {
     setValue(value);
   };
 
+  // to do list의 선택된 항목 제거
   const handleDelToDos = (e) => {
-    // console.dir(e.target.parentNode.parentNode.id);
     const {
       target: {
         parentNode: {
@@ -52,12 +57,10 @@ function App() {
     } = e;
     const newToDos = toDos.filter((toDo) => toDo.id !== parseInt(id));
     setToDos(newToDos);
-    // console.log(newToDos, id);
-    // console.log(toDos, id);
   };
 
+  // to done list의 선택된 항목 제거
   const handleDelToDones = (e) => {
-    // console.dir(e.target.parentNode.parentNode.id);
     const {
       target: {
         parentNode: {
@@ -67,10 +70,9 @@ function App() {
     } = e;
     const newToDones = toDones.filter((toDone) => toDone.id !== parseInt(id));
     setToDones(newToDones);
-    // console.log(newToDos, id);
-    // console.log(toDos, id);
   };
 
+  // to do -> to done 항목 이동
   const convertToDo = (e) => {
     const {
       target: {
@@ -87,6 +89,7 @@ function App() {
     setToDones((prev) => [...prev, doneToDo]);
   };
 
+  // to done -> to do 항목 이동
   const convertToDone = (e) => {
     const {
       target: {
@@ -103,58 +106,25 @@ function App() {
     setToDos((prev) => [...prev, doToDone]);
   };
 
-  // useEffect(() => {
-  //   console.log('load', loadInitialToDos());
-  //   console.log('load', loadInitialToDones());
-  // }, []);
-
+  // toDos, toDones 저장 / 수정 / 삭제 시, 저장
   useEffect(() => {
-    localStorage.setItem('toDos', JSON.stringify(toDos));
-    localStorage.setItem('toDones', JSON.stringify(toDones));
-
-    console.log('toDos', toDos);
-    console.log('toDone', toDones);
+    localStorage.setItem(TODOS, JSON.stringify(toDos));
+    localStorage.setItem(TODONES, JSON.stringify(toDones));
   }, [toDos, toDones]);
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={onChange}
-          value={value}
-          type='text'
-          placeholder='Write your to do'
-        />
-        <button>Submit</button>
-      </form>
-      {toDos && (
-        <ul>
-          {toDos.map((toDo, index) => (
-            <li key={index} id={toDo.id}>
-              <span>{toDo.text}</span>
-              <div>
-                <button onClick={handleDelToDos}>Del</button>
-                <button>Rewrite</button>
-                <button onClick={convertToDo}>Done</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-      {toDones && (
-        <ul>
-          {toDones.map((toDone, index) => (
-            <li key={index} id={toDone.id}>
-              <span>{toDone.text}</span>
-              <div>
-                <button onClick={handleDelToDones}>Del</button>
-                <button>Rewrite</button>
-                <button onClick={convertToDone}>Do</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      <Form onSubmit={onSubmit} onChange={onChange} value={value} />
+      <ToDosList
+        toDos={toDos}
+        handleDelToDos={handleDelToDos}
+        convertToDo={convertToDo}
+      />
+      <ToDonesList
+        toDones={toDones}
+        handleDelToDones={handleDelToDones}
+        convertToDone={convertToDone}
+      />
     </div>
   );
 }
