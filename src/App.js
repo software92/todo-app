@@ -1,10 +1,31 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
 import Form from './components/Form';
 import ToDonesList from './components/ToDonesList';
 import ToDosList from './components/ToDosList';
 
 const TODOS = 'toDos';
 const TODONES = 'toDones';
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: yellow;
+  border: 1px solid blue;
+  overflow: auto;
+  padding-bottom: 30px;
+`;
+
+const ListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: 90%;
+`;
 
 // Web 접속 / 페이지 reload,
 // localStorage에 저장되어 있는 toDos, toDones를 가져옴
@@ -113,19 +134,21 @@ function App() {
   }, [toDos, toDones]);
 
   return (
-    <div>
+    <Container>
       <Form onSubmit={onSubmit} onChange={onChange} value={value} />
-      <ToDosList
-        toDos={toDos}
-        handleDelToDos={handleDelToDos}
-        convertToDo={convertToDo}
-      />
-      <ToDonesList
-        toDones={toDones}
-        handleDelToDones={handleDelToDones}
-        convertToDone={convertToDone}
-      />
-    </div>
+      <ListContainer>
+        <ToDosList
+          toDos={toDos}
+          handleDelToDos={handleDelToDos}
+          convertToDo={convertToDo}
+        />
+        <ToDonesList
+          toDones={toDones}
+          handleDelToDones={handleDelToDones}
+          convertToDone={convertToDone}
+        />
+      </ListContainer>
+    </Container>
   );
 }
 
