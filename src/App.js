@@ -27,6 +27,11 @@ const ListContainer = styled.div`
   width: 90%;
 `;
 
+const StanbyText = styled.h1`
+  font-size: 50px;
+  font-weight: bold;
+`;
+
 // Web 접속 / 페이지 reload,
 // localStorage에 저장되어 있는 toDos, toDones를 가져옴
 // 데이터가 없으면 []
@@ -136,18 +141,22 @@ function App() {
   return (
     <Container>
       <Form onSubmit={onSubmit} onChange={onChange} value={value} />
-      <ListContainer>
-        <ToDosList
-          toDos={toDos}
-          handleDelToDos={handleDelToDos}
-          convertToDo={convertToDo}
-        />
-        <ToDonesList
-          toDones={toDones}
-          handleDelToDones={handleDelToDones}
-          convertToDone={convertToDone}
-        />
-      </ListContainer>
+      {toDos.length === 0 && toDones.length === 0 ? (
+        <StanbyText>You are free!</StanbyText>
+      ) : (
+        <ListContainer>
+          <ToDosList
+            toDos={toDos}
+            handleDelToDos={handleDelToDos}
+            convertToDo={convertToDo}
+          />
+          <ToDonesList
+            toDones={toDones}
+            handleDelToDones={handleDelToDones}
+            convertToDone={convertToDone}
+          />
+        </ListContainer>
+      )}
     </Container>
   );
 }
