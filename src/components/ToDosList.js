@@ -71,26 +71,4 @@ const ToDosList = ({ toDos, handleDelToDos, convertToDo }) => {
   );
 };
 
-// const ToDosList = ({ toDos, handleDelToDos, convertToDo }) => {
-//   return (
-//     <DoContainer>
-//       <ListTitle>Do List</ListTitle>
-//       {toDos.length > 0 && (
-//         <List>
-//           {toDos.map((toDo, index) => (
-//             <Item key={index} id={toDo.id}>
-//               <TEXT>{toDo.text}</TEXT>
-//               <ButtonContainer>
-//                 {/* <button>Rewrite</button> */}
-//                 <Button onClick={convertToDo}>Done</Button>
-//                 <Button onClick={handleDelToDos}>Del</Button>
-//               </ButtonContainer>
-//             </Item>
-//           ))}
-//         </List>
-//       )}
-//     </DoContainer>
-//   );
-// };
-
 export default ToDosList;

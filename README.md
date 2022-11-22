@@ -3,13 +3,12 @@
 ### 조건
 
 - react hook
-- react-router
+- styled-components
 
 ### 기능
 
 - 할 일 추가
 - 할 일 제거
-- 할 일 수정(?)
 
 #### v2
 
