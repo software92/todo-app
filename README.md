@@ -1,4 +1,10 @@
-# To Do App v1 (React)
+# To Do App v2 (React)
+
+### 추가 조건
+
+- react-beautiful-dnd
+
+## To Do App v1 (React)
 
 ### 조건
 
@@ -26,7 +32,3 @@
 ![empty](src/imgs/empty.png)
 
 ---
-
-#### v2
-
-- react-beautiful-dnd를 사용한 to do list
