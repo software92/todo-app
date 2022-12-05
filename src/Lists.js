@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 import Form from './components/Form';
@@ -147,8 +148,22 @@ const Lists = () => {
     //   : setToDos((prev) => [...prev, selectItem]);
   };
 
+  const onDragEnd = (result) => {
+    // drag 이후 컴포넌트 재배치
+    // console.log('result: ', result);
+
+    const newToDos = [...toDos];
+    const temp = newToDos.splice(result.source.index, 1);
+
+    newToDos.splice(result.destination.index, 0, ...temp);
+    setToDos(newToDos);
+
+    // console.log(newToDos, temp);
+  };
+
   // toDos, toDones 저장 / 수정 / 삭제 시, 저장
   useEffect(() => {
+    // console.log('setToItems');
     saveValues(toDos, toDones);
     return saveValues(toDos, toDones);
   }, [toDos, toDones]);
@@ -159,18 +174,20 @@ const Lists = () => {
       {toDos.length === 0 && toDones.length === 0 ? (
         <StanbyText>You are free!</StanbyText>
       ) : (
-        <ListContainer>
-          <ToDosList
-            toDos={toDos}
-            changeCategory={changeCategory}
-            delRow={delRow}
-          />
-          <ToDonesList
-            toDones={toDones}
-            changeCategory={changeCategory}
-            delRow={delRow}
-          />
-        </ListContainer>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <ListContainer>
+            <ToDosList
+              toDos={toDos}
+              changeCategory={changeCategory}
+              delRow={delRow}
+            />
+            <ToDonesList
+              toDones={toDones}
+              changeCategory={changeCategory}
+              delRow={delRow}
+            />
+          </ListContainer>
+        </DragDropContext>
       )}
     </Container>
   );

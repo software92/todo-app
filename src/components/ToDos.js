@@ -1,3 +1,4 @@
+import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 const Item = styled.li`
@@ -32,19 +33,30 @@ const Button = styled.button`
   }
 `;
 
-const ToDos = ({ id, text, changeCategory, delRow }) => (
-  <Item id={id}>
-    <Text>{text}</Text>
-    <ButtonContainer>
-      {/* <button>Rewrite</button> */}
-      <Button name='toDo' onClick={changeCategory}>
-        Done
-      </Button>
-      <Button name='toDo' onClick={delRow}>
-        Del
-      </Button>
-    </ButtonContainer>
-  </Item>
+const ToDos = ({ id, text, changeCategory, delRow, index }) => (
+  <Draggable draggableId={text} index={index}>
+    {(provided) => {
+      return (
+        <Item
+          id={id}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <Text>{text}</Text>
+          <ButtonContainer>
+            {/* <button>Rewrite</button> */}
+            <Button name='toDo' onClick={changeCategory}>
+              Done
+            </Button>
+            <Button name='toDo' onClick={delRow}>
+              Del
+            </Button>
+          </ButtonContainer>
+        </Item>
+      );
+    }}
+  </Draggable>
 );
 
 export default ToDos;
