@@ -152,13 +152,28 @@ const Lists = () => {
     // drag 이후 컴포넌트 재배치
     // console.log('result: ', result);
 
+    if (!result.destination) return;
+
     const newToDos = [...toDos];
-    const temp = newToDos.splice(result.source.index, 1);
+    const newToDones = [...toDones];
 
-    newToDos.splice(result.destination.index, 0, ...temp);
+    // dragging component
+    let temp = [];
+
+    if (result.source.droppableId === 'toDosId') {
+      temp = newToDos.splice(result.source.index, 1);
+    } else {
+      temp = newToDones.splice(result.source.index, 1);
+    }
+
+    if (result.destination.droppableId === 'toDosId') {
+      newToDos.splice(result.destination.index, 0, ...temp);
+    } else {
+      newToDones.splice(result.destination.index, 0, ...temp);
+    }
+
     setToDos(newToDos);
-
-    // console.log(newToDos, temp);
+    setToDones(newToDones);
   };
 
   // toDos, toDones 저장 / 수정 / 삭제 시, 저장

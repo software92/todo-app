@@ -34,7 +34,7 @@ const Button = styled.button`
 `;
 
 const ToDos = ({ id, text, changeCategory, delRow, index }) => (
-  <Draggable draggableId={text} index={index}>
+  <Draggable draggableId={String(id)} index={index}>
     {(provided) => {
       return (
         <Item
