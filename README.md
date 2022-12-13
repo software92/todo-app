@@ -1,21 +1,17 @@
 # To Do App v2 (React)
 
-### 추가 조건
-
-- react-beautiful-dnd
-
-## To Do App v1 (React)
-
-### 조건
+### stack
 
 - react hook
 - styled-components
+- react-beautiful-dnd
 
 ### 기능
 
 - 할 일 추가
 - 할 일 -> 할 일 완료 목록 이동
 - 할 일 제거
+- 할 일 <-> 할 일 완료 목록 drag 이동
 
 ### Screen
 
