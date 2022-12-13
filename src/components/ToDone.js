@@ -2,11 +2,15 @@ import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 const Item = styled.li`
-  border-bottom: 2px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 5px;
+  margin-bottom: 5px;
+  background-color: white;
+  border-bottom: 2px solid red;
+  border: ${(props) => (props.isDragging ? '2px solid red' : null)};
+  border-radius: ${(props) => (props.isDragging ? '10px' : null)};
 `;
 const Text = styled.span`
   width: 80%;
@@ -35,12 +39,13 @@ const Button = styled.button`
 
 const ToDone = ({ id, text, changeCategory, delRow, index }) => (
   <Draggable draggableId={String(id)} index={index}>
-    {(provided) => (
+    {(provided, snapshot) => (
       <Item
         id={id}
         ref={provided.innerRef}
         {...provided.dragHandleProps}
         {...provided.draggableProps}
+        isDragging={snapshot.isDragging}
       >
         <Text>{text}</Text>
         <ButtonContainer>
