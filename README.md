@@ -5,6 +5,7 @@
 - react hook
 - styled-components
 - react-beautiful-dnd
+- gh-pages
 
 ### 기능
 
