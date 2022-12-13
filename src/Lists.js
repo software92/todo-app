@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 import Form from './components/Form';
@@ -78,29 +79,6 @@ const Lists = () => {
       const newToDones = toDones.filter((toDone) => toDone.id !== parseInt(id));
       setToDones(newToDones);
     }
-
-    // 2, 3번의 코드는 1번 코드보다 짧지만, 가독성이 떨어져 사용 안함
-    // 2
-    // if (name === 'toDo') {
-    //   setToDos(toDos.filter((toDo) => toDo.id !== parseInt(id)));
-    // } else {
-    //   setToDones(toDones.filter((toDone) => toDone.id !== parseInt(id)));
-    // }
-    //
-    // 3
-    // const newRow =
-    //   name === 'toDo'
-    //     ? toDos.filter((toDo) => toDo.id !== parseInt(id))
-    //     : toDones.filter((toDone) => toDone.id !== parseInt(id));
-    // name === 'toDo' ? setToDos(newRow) : setToDones(newRow);
-
-    // name === 'toDo'
-    //   ? setToDos(() => {
-    //       return toDos.filter((toDo) => toDo.id !== parseInt(id));
-    //     })
-    //   : setToDones(() => {
-    //       return toDones.filter((toDone) => toDone.id !== parseInt(id));
-    //     });
   };
   // to do -> to done 항목 이동, to done -> to do 항목 이동
   const changeCategory = (e) => {
@@ -130,21 +108,32 @@ const Lists = () => {
       setToDones(newArray);
       setToDos((prev) => [...prev, selectRow]);
     }
+  };
 
-    // 2 - 1번 코드보다 짧을 수 있지만, 가독성이 떨어져 사용 안함
-    // const newArray =
-    //   name === 'toDos'
-    //     ? toDos.filter((toDo) => toDo.id !== parseInt(id))
-    //     : toDones.filter((toDone) => toDone.id !== parseInt(id));
-    // const selectItem =
-    //   name === 'toDos'
-    //     ? toDos.find((toDo) => toDo.id === parseInt(id))
-    //     : toDones.find((toDone) => toDone.id === parseInt(id));
-    //
-    // name === 'toDos' ? setToDos(newArray) : setToDones(newArray);
-    // name === 'toDos'
-    //   ? setToDones((prev) => [...prev, selectItem])
-    //   : setToDos((prev) => [...prev, selectItem]);
+  const onDragEnd = (result) => {
+    // drag 이후 컴포넌트 재배치
+    if (!result.destination) return;
+
+    const newToDos = [...toDos];
+    const newToDones = [...toDones];
+
+    // dragging component
+    let temp = [];
+
+    if (result.source.droppableId === 'toDosId') {
+      temp = newToDos.splice(result.source.index, 1);
+    } else {
+      temp = newToDones.splice(result.source.index, 1);
+    }
+
+    if (result.destination.droppableId === 'toDosId') {
+      newToDos.splice(result.destination.index, 0, ...temp);
+    } else {
+      newToDones.splice(result.destination.index, 0, ...temp);
+    }
+
+    setToDos(newToDos);
+    setToDones(newToDones);
   };
 
   // toDos, toDones 저장 / 수정 / 삭제 시, 저장
@@ -159,18 +148,20 @@ const Lists = () => {
       {toDos.length === 0 && toDones.length === 0 ? (
         <StanbyText>You are free!</StanbyText>
       ) : (
-        <ListContainer>
-          <ToDosList
-            toDos={toDos}
-            changeCategory={changeCategory}
-            delRow={delRow}
-          />
-          <ToDonesList
-            toDones={toDones}
-            changeCategory={changeCategory}
-            delRow={delRow}
-          />
-        </ListContainer>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <ListContainer>
+            <ToDosList
+              toDos={toDos}
+              changeCategory={changeCategory}
+              delRow={delRow}
+            />
+            <ToDonesList
+              toDones={toDones}
+              changeCategory={changeCategory}
+              delRow={delRow}
+            />
+          </ListContainer>
+        </DragDropContext>
       )}
     </Container>
   );

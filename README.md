@@ -1,15 +1,18 @@
-# To Do App v1 (React)
+# To Do App v2 (React)
 
-### 조건
+### stack
 
 - react hook
 - styled-components
+- react-beautiful-dnd
+- gh-pages
 
 ### 기능
 
 - 할 일 추가
 - 할 일 -> 할 일 완료 목록 이동
 - 할 일 제거
+- 할 일 <-> 할 일 완료 목록 drag 이동
 
 ### Screen
 
@@ -26,7 +29,3 @@
 ![empty](src/imgs/empty.png)
 
 ---
-
-#### v2
-
-- react-beautiful-dnd를 사용한 to do list

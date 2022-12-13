@@ -1,3 +1,4 @@
+import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import ToDone from './ToDone';
 
@@ -24,16 +25,22 @@ const ToDonesList = ({ toDones, changeCategory, delRow }) => {
     toDones.length > 0 && (
       <DoContainer>
         <ListTitle>Done List</ListTitle>
-        <List>
-          {toDones.map((toDone) => (
-            <ToDone
-              key={toDone.id}
-              {...toDone}
-              changeCategory={changeCategory}
-              delRow={delRow}
-            />
-          ))}
-        </List>
+        <Droppable droppableId='toDonesId'>
+          {(provided) => (
+            <List ref={provided.innerRef} {...provided.droppableProps}>
+              {toDones.map((toDone, index) => (
+                <ToDone
+                  key={toDone.id}
+                  {...toDone}
+                  changeCategory={changeCategory}
+                  delRow={delRow}
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
+            </List>
+          )}
+        </Droppable>
       </DoContainer>
     )
   );

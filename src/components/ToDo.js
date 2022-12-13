@@ -37,28 +37,31 @@ const Button = styled.button`
   }
 `;
 
-const ToDone = ({ id, text, changeCategory, delRow, index }) => (
+const ToDo = ({ id, text, changeCategory, delRow, index }) => (
   <Draggable draggableId={String(id)} index={index}>
-    {(provided, snapshot) => (
-      <Item
-        id={id}
-        ref={provided.innerRef}
-        {...provided.dragHandleProps}
-        {...provided.draggableProps}
-        isDragging={snapshot.isDragging}
-      >
-        <Text>{text}</Text>
-        <ButtonContainer>
-          <Button name='toDone' onClick={changeCategory}>
-            Do
-          </Button>
-          <Button name='toDone' onClick={delRow}>
-            Del
-          </Button>
-        </ButtonContainer>
-      </Item>
-    )}
+    {(provided, snapshot) => {
+      return (
+        <Item
+          id={id}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          isDragging={snapshot.isDragging}
+        >
+          <Text>{text}</Text>
+          <ButtonContainer>
+            {/* <button>Rewrite</button> */}
+            <Button name='toDo' onClick={changeCategory}>
+              Done
+            </Button>
+            <Button name='toDo' onClick={delRow}>
+              Del
+            </Button>
+          </ButtonContainer>
+        </Item>
+      );
+    }}
   </Draggable>
 );
 
-export default ToDone;
+export default ToDo;
