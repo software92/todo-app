@@ -1,5 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 const Item = styled.li`
   display: flex;
@@ -37,7 +37,7 @@ const Button = styled.button`
   }
 `;
 
-const ToDos = ({ id, text, changeCategory, delRow, index }) => (
+const ToDo = ({ id, text, changeCategory, delRow, index }) => (
   <Draggable draggableId={String(id)} index={index}>
     {(provided, snapshot) => {
       return (
@@ -64,4 +64,4 @@ const ToDos = ({ id, text, changeCategory, delRow, index }) => (
   </Draggable>
 );
 
-export default ToDos;
+export default ToDo;
