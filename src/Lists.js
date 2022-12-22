@@ -23,7 +23,13 @@ const ListContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 40px;
-  width: 90%;
+  width: 500px;
+  @media screen and (max-width: 1100px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const StanbyText = styled.h1`

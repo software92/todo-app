@@ -18,6 +18,7 @@ const Text = styled.span`
   font-size: 25px;
   word-break: break-all;
   line-height: 1.3;
+  text-decoration: line-through red;
 `;
 const ButtonContainer = styled.div`
   display: flex;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ToDone from './ToDone';
 
 const DoContainer = styled.div`
-  width: 40%;
+  min-width: 500px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -25,17 +25,20 @@ const List = styled.ul`
 
 const Modal = styled.div`
   position: absolute;
-  top: 0;
+  top: 1px;
   display: flex;
   flex-direction: column;
   width: 100%;
   & span {
+    border-radius: 15px 15px 0 0;
+    height: 65px;
     background-color: red;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-size: 30px;
     font-weight: bold;
-    padding: 5px 10px;
   }
 `;
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ToDo from './ToDo';
 
 const DoContainer = styled.div`
-  width: 40%;
+  min-width: 500px;
 `;
 
 const ListTitle = styled.h1`
