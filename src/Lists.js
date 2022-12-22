@@ -156,6 +156,7 @@ const Lists = () => {
               delRow={delRow}
             />
             <ToDonesList
+              toDos={toDos}
               toDones={toDones}
               changeCategory={changeCategory}
               delRow={delRow}

@@ -4,6 +4,9 @@ import ToDone from './ToDone';
 
 const DoContainer = styled.div`
   width: 40%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ListTitle = styled.h1`
@@ -20,11 +23,32 @@ const List = styled.ul`
   background: rgba(255, 255, 255, 1);
 `;
 
-const ToDonesList = ({ toDones, changeCategory, delRow }) => {
+const Modal = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  & span {
+    background-color: red;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+`;
+
+const ToDonesList = ({ toDos, toDones, changeCategory, delRow }) => {
   return (
     toDones.length > 0 && (
       <DoContainer>
         <ListTitle>Done List</ListTitle>
+        {!!toDos && toDos.length === 0 && (
+          <Modal>
+            <span>Today Complete to do!</span>
+          </Modal>
+        )}
         <Droppable droppableId='toDonesId'>
           {(provided) => (
             <List ref={provided.innerRef} {...provided.droppableProps}>

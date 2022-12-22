@@ -27,7 +27,6 @@ const ToDosList = ({ toDos, changeCategory, delRow }) => {
         <ListTitle>Do List</ListTitle>
         <Droppable droppableId='toDosId'>
           {(provided) => {
-            // console.log(provided);
             return (
               <List ref={provided.innerRef} {...provided.droppableProps}>
                 {toDos.map((toDo, index) => (

@@ -27,12 +27,13 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  width: 50px;
+  width: 40px;
   border-radius: 5px;
   background: red;
   color: white;
-  padding: 2px;
+  padding: 3px;
   &:first-child {
+    width: 50px;
     margin-bottom: 3px;
   }
 `;
