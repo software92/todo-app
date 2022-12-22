@@ -18,16 +18,16 @@
 
 ### Actions
 
-#### :Add to do
+#### Add to do
 
-<img width='40%' src='https://user-images.githubusercontent.com/95457388/209030271-8a8b1193-efde-4db8-b380-23cdd9e1b734.gif' />
+<img width='40%' src='https://user-images.githubusercontent.com/95457388/209156587-3016e935-be2b-4290-9e67-30e80c84c425.gif'/>
 
-#### :Drag and drop
+#### Drag and drop
 
-<img width='40%' src='https://user-images.githubusercontent.com/95457388/209030279-79d7682f-a405-4603-9b04-36522b183536.gif' />
+<img width='40%' src='https://user-images.githubusercontent.com/95457388/209157840-2c57ee04-3009-4b46-ba5d-1bc8f5082296.gif'/>
 
-#### :Switching to do
+#### Switching to do
 
-<img width='40%' src='https://user-images.githubusercontent.com/95457388/209030277-1311302e-ba69-4ec2-9b7b-a7f3b14ed85f.gif' />
+<img width='40%' src='https://user-images.githubusercontent.com/95457388/209156573-aa45a49f-5d70-4387-a64f-c5638a52718f.gif'/>
 
 ## Page: <a href='https://software92.github.io/todo-app/'>https://software92.github.io/todo-app/</a>
