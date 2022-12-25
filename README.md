@@ -1,5 +1,7 @@
 # To Do App v2 (React)
 
+#### Page: <a href='https://software92.github.io/todo-app/'>https://software92.github.io/todo-app/</a>
+
 ## stack
 
 - react hook
@@ -29,5 +31,3 @@
 #### Switching to do
 
 <img width='40%' src='https://user-images.githubusercontent.com/95457388/209156573-aa45a49f-5d70-4387-a64f-c5638a52718f.gif'/>
-
-## Page: <a href='https://software92.github.io/todo-app/'>https://software92.github.io/todo-app/</a>
