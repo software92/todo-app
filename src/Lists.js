@@ -27,7 +27,7 @@ const ListContainer = styled.div`
   @media screen and (max-width: 1100px) {
     flex-direction: column;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
 `;
